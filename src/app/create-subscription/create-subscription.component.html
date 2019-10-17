@@ -1,0 +1,37 @@
+<div class="container" novalidate>
+    <form [formGroup]="subscriptionForm" #formDir="ngForm" (ngSubmit)="onSubmit(subscriptionForm.value)" class="form" (keyup)="userTyping($event)">
+
+        <div class="form-element">
+            <!-- <mat-error *ngIF="formWarning">[Form is invalid]</mat-error> -->
+            <mat-error *ngFor="let message of messages">[{{message.field}}] {{message.message}}</mat-error>
+        </div>
+
+
+        <mat-form-field class="form-element">
+            <input matInput placeholder="Email" formControlName="email">
+            <mat-hint>Required</mat-hint>
+            <mat-error *ngIf="email?.errors">{{getEmailErrorMessage()}}</mat-error>
+        </mat-form-field>
+
+
+        <mat-form-field class="form-element">
+            <mat-select matInput [(value)]="selectedSubscription" name="subscriptionType">
+                <mat-option *ngFor="let type of subscriptionTypes" [value]="type.value">{{type.name}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+
+        <mat-form-field class="form-element">
+            <input matInput placeholder="Password" type="password" formControlName="password">
+            <mat-hint>Required. Choose a password of at least eight characters with one special character</mat-hint>
+            <mat-error *ngIf="password?.errors">{{getPasswordErrorMessage()}}</mat-error>
+        </mat-form-field>
+
+
+        <div class="button-row">
+            <button mat-raised-button color="primary" type="submit" class="btn btn-primary">Submit</button>
+            <button mat-raised-button [disabled]="!subscriptionForm.touched" color="primary" type="button" class="btn btn-primary" (click)="onClear()">Clear</button>
+        </div>
+
+    </form>
+</div>
