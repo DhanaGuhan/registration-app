@@ -56,10 +56,6 @@ export class CreateSubscriptionComponent implements OnInit{
 
   userTyping(value: KeyboardEvent) {
    //  this.setFormWarning();
-
-
-    this.userStopped = false;
-
     if (this.timeout) {
       window.clearTimeout(this.timeout);
     }
